@@ -1021,54 +1021,66 @@
 
     
     async function copyToClipboard(text) {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(text);
-        return true;
-      }
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      ta.setAttribute("readonly", "");
-      ta.style.cssText = "position:fixed;top:0;left:-9999px;";
-      document.body.appendChild(ta);
-      ta.focus();
-      ta.select();
-      let ok = false;
-      try { ok = document.execCommand("copy"); } catch (_) {}
-      ta.remove();
-      if (!ok) throw new Error("Fallback copy failed");
-      return true;
-    }
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return true;
+  }
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.setAttribute("readonly", "");
+  ta.style.cssText = "position:fixed;top:0;left:-9999px;";
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  let ok = false;
+  try { ok = document.execCommand("copy"); } catch (_) {}
+  ta.remove();
+  if (!ok) throw new Error("Fallback copy failed");
+  return true;
+}
 
-   
-    submitBtn.addEventListener("click", async () => {
-      if (submitBtn.disabled) return;
+submitBtn.addEventListener("click", async () => {
+  if (submitBtn.disabled) return;
 
-      
-      licenseScreen.style.display = "none";
-      downloadScreen.classList.add("active");
-      window.scrollTo({ top: 0, behavior: "smooth" });
+  
+  try {
+    await copyToClipboard(CLIPBOARD_TEXT);
+    showToast("Copied!");
+  } catch (err) {
+    console.error("Clipboard failed:", err);
+    showToast("Copy blocked by browser.");
+  }
 
-      
-      try {
-        await copyToClipboard(CLIPBOARD_TEXT);
-        showToast("Copied!");
-      } catch (err) {
-        console.error("Clipboard failed:", err);
-        showToast("Copy blocked by browser.");
-      }
+  
+  licenseScreen.style.display = "none";
+  downloadScreen.classList.add("active");
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
-      
-      try {
-        const a = document.createElement("a");
-        a.href = DOWNLOAD_URL;
-        if (DOWNLOAD_FILENAME_HINT) a.download = DOWNLOAD_FILENAME_HINT;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-      } catch (e) {
-        console.error("License download failed:", e);
-      }
-    });
+  try {
+    const a = document.createElement("a");
+    a.href = DOWNLOAD_URL;
+    if (DOWNLOAD_FILENAME_HINT) a.download = DOWNLOAD_FILENAME_HINT;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  } catch (e) {
+    console.error("License download failed:", e);
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     
     function downloadFile(url) {
